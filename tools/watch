@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+./node_modules/watchify/bin/cmd.js -t coffeeify ./src/scripts/entries/app.coffee -o ./public/js/app.js --debug -v

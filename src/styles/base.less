@@ -1,0 +1,286 @@
+// Colors
+
+@light-gray-50: #F8F9F9;
+@light-gray-100: #EDEFF0;
+@light-gray-200: #E2E4E6;
+@light-gray-300: #D6DADC;
+@light-gray-400: #CDD2D4;
+@light-gray-500: #C4C9CC;
+@light-gray-600: #B6BBBF;
+@light-gray-700: #A5ACB0;
+@light-gray-800: #959DA1;
+@light-gray-900: #838C91;
+
+@brand-color: #19A68E;
+
+@default-text-color: #4a4a4f;
+
+
+// Media Query
+
+@small: ~"only screen and (max-width: 800px)";
+
+
+// Base
+
+body {
+  font-size: 24px;
+  line-height: 1.4;
+  transition-property: background;
+  transition-duration: 1000ms;
+}
+
+@media @small {
+  body {
+    font-size: 20px;
+  }
+}
+
+body, input, textarea, button {
+  color: @default-text-color;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+}
+
+button {
+  background: none;
+  border: 4px solid @brand-color;
+  color: @brand-color;
+  border-radius: .5em;
+  font-weight: bold;
+  line-height: 1.5em;
+  margin-left: .5em;
+  min-width: 180px;
+  padding: .3em 1em;
+
+  &:hover,
+  &:focus {
+    background-color: @brand-color;
+    color: #fff;
+    outline: none;
+  }
+
+  &:active {
+    opacity: .8;
+  }
+
+}
+
+  button.mod-white {
+    background-color: @brand-color;
+    border-color: #fff;
+    color: #fff;
+
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      color: @brand-color;
+    }
+
+  }
+
+li {
+  margin: 0 0 .2em 0;
+}
+
+
+// Logo
+
+.logo {
+  margin: 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+}
+
+  .logo-mark {
+    float: left;
+    cursor: pointer;
+    margin-right: .5em;
+  }
+
+    .logo-mark-image {
+      height: 64px;
+      width: 64px;
+    }
+
+    .logo-mark-image.mod-clickable {
+      transition-duration: 250ms;
+      transition-property: opacity transform;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &:active {
+        opacity: .8;
+      }
+
+    }
+
+@media @small {
+
+  .logo {
+    margin: 32px;
+  }
+
+  .logo-mark-image {
+    height: 48px;
+    width: 48px;
+  }
+
+}
+
+
+// New Game Button
+
+.button-section {
+  margin: 32px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
+}
+
+
+// Intro
+
+.intro {
+  background-color: @brand-color;
+  bottom: 0;
+  color: #fff;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+  .intro-content {
+    margin: 96px auto;
+    padding: 0 128px;
+    max-width: 33em;
+  }
+
+    .intro-content-section {
+      margin-bottom: 1em;
+    }
+
+      .intro-content-section-header {
+        font-weight: bold;
+        margin: 0;
+        opacity: .6;
+        text-transform: uppercase;
+      }
+
+      .intro-content-section-details {
+        margin-top: .3em;
+      }
+
+      .intro-content-section-details a {
+        color: #fff;
+      }
+
+@media @small {
+  .intro-content {
+    margin: 112px auto;
+    padding: 0 32px;
+  }
+}
+
+
+// Game
+
+.game {
+  margin: 96px auto;
+  max-width: 33em;
+  position: relative;
+  text-align: center;
+  transition-duration: 250ms;
+  transition-property: opacty filter;
+  z-index: 0;
+}
+
+  .game-section {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0 1em;
+    vertical-align: top;
+    width: 100%;
+    text-align: left;
+  }
+
+  .game-section.mod-left {
+    padding: 0 .5em 0 1em;
+    text-align: center;
+    width: 20%;
+  }
+
+  .game-section.mod-right {
+    padding: 0 1em 0 .5em;
+    width: 80%;
+  }
+
+    .game-section-header {
+      font-weight: bold;
+      margin-bottom: .3em;
+      opacity: .6;
+      text-transform: uppercase;
+    }
+
+    .game-section-detail {
+      font-size: 1.3em;
+      padding: 0 0 1em;
+      margin-top: 0.3em;
+    }
+
+.game.is-blurred {
+  filter: blur(15px);
+  opacity: .4;
+}
+
+@media @small {
+
+  .game {
+    margin: 96px 24px;
+  }
+
+  .game-section.mod-left,
+  .game-section.mod-right {
+    width: 100%;
+  }
+
+}
+
+
+// Letter
+
+.letter {
+  font-size: 3em;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+// Category List
+
+.category-list {
+  margin-top: .6em;
+  padding-left: 2em;
+}
+
+
+// End of Timer
+
+body.end-o-timer {
+  background-color: #E6E600;
+}
+
+
+// Utillities
+
+.u-hidden {
+  display: none;
+}
