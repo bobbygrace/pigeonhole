@@ -1,7 +1,6 @@
 letters = require '../data/letters.coffee'
 cats = require '../data/categories.coffee'
 sounds = require '../data/sounds.json'
-shuffle = require 'knuth-shuffle'
 { renderable, div, p, img, span, text, strong, a, button, ol, li, h1, h2 } = require 'teacup'
 
 @counterId = null
@@ -9,8 +8,25 @@ shuffle = require 'knuth-shuffle'
 
 # Utilities
 
-getRandomItems = (items, number) ->
-  shuffle.knuthShuffle(items).slice(0, number ? 1)
+# http://stackoverflow.com/a/17891411
+randomNoRepeats = (array) ->
+  copy = array.slice(0)
+  ->
+    if copy.length < 1
+      copy = array.slice(0)
+    index = Math.floor(Math.random() * copy.length)
+    item = copy[index]
+    copy.splice index, 1
+    item
+
+getMultipleItems = (fn, num) ->
+  arr = []
+  i = 0
+  while i < num
+    arr.push fn()
+    i++
+  return arr
+
 
 getElem = (className) ->
   # Takes only 'js-' prefixed class name
@@ -104,8 +120,12 @@ baseLayoutTemplate = renderable ->
 
 # Business
 
+catChooser = randomNoRepeats(cats)
+letterChooser = randomNoRepeats(letters)
+audioChooser = randomNoRepeats(sounds)
+
 playRandomSound = ->
-  file = getRandomItems(sounds)
+  file = audioChooser()
   audio = new Audio("/audio/#{file}")
 
   audio.addEventListener 'ended', ->
@@ -159,8 +179,8 @@ makeNewGame = ->
   clearInterval(@counterId)
 
   data =
-    letter: getRandomItems(letters)[0]
-    catList: getRandomItems(cats, 10)
+    letter: letterChooser()
+    catList: getMultipleItems(catChooser, 10)
 
   getElem('js-game').innerHTML = gameTemplate data
   getElem('js-intro').innerHTML = ''
