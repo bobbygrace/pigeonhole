@@ -36,7 +36,7 @@ getElem = (className) ->
 # Templates
 
 introTemplate = renderable ->
-  howToText = "Get a lot of people together. Write 1 though 10 on many
+  howToText = "Get a lot of people together. Write 1 through 10 on many
     sheets of paper and hand them out. Ready? Hit “Start”. You’ll get one
     letter, ten categories, and two and a half minutes. Write down an answer
     for each of the categories that starts with the letter. For example, you
@@ -49,9 +49,9 @@ introTemplate = renderable ->
     answer, then you get a point for that category. If more than half the
     people say, “No way. That doesn’t count.” then it doesn’t count. Now
     compare the next category and so one. Keep track of the points if you want.
-    Click “New Game” for another round. Keep playing rounds until you pass out.
-    When you wake up, compare points. Ignore the points. Everybody wins. Click
-    “New Game”."
+    Click “New Game” for another round. Keep playing rounds until you fall
+    asleep. When you wake up, compare points. Ignore the points. Everybody wins.
+    Click “New Game”."
 
   div '.logo', ->
     img '.logo-mark-image', src: '/images/logo-white.svg'
