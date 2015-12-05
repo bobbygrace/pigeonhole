@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
+./node_modules/gulp/bin/gulp.js &
 ./node_modules/browserify/bin/cmd.js \
   -t [coffeeify --no-sourcemaps] \
   -t [uglifyify --no-sourcemaps --compress --screw-ie8] \
-  ./src/scripts/entries/app.coffee > ./public/js/app.js
+  ./src/scripts/entries/app.coffee > ./public/js/app.js;

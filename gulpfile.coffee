@@ -59,7 +59,7 @@ gulp.task 'audiodata', ->
       if err
         console.log err
 
-      console.log 'It is written.'
+      console.log 'sounds.json is written.'
 
 gulp.task 'watch', ->
   gulp.watch './src/styles/*', ['styles']
@@ -67,4 +67,5 @@ gulp.task 'watch', ->
   gulp.watch './public/audio/*', ['audiodata']
 
 
-gulp.task 'default', ['styles', 'templates', 'audiodata', 'watch']
+gulp.task 'dev', ['styles', 'templates', 'audiodata', 'watch']
+gulp.task 'default', ['styles', 'templates', 'audiodata']
