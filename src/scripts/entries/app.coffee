@@ -140,17 +140,17 @@ renderTimeLeft = (secondsLeft) ->
 
 endTimerEvent = ->
   clearInterval(@counterId)
-  document.body.classList.add('end-o-timer')
+  document.body.classList.add('is-end-of-timer')
   getElem('js-timer-section').innerHTML = gameOverTemplate()
   getElem('js-header-button').innerHTML = newGameButtonTemplate()
   playRandomSound()
   setTimeout ->
-    document.body.classList.remove('end-o-timer')
+    document.body.classList.remove('is-end-of-timer')
   , 7000
 
   getElem('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
-    document.body.classList.remove('end-o-timer')
+    document.body.classList.remove('is-end-of-timer')
     false
 
   return
