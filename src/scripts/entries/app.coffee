@@ -32,6 +32,10 @@ getElem = (className) ->
   # Takes only 'js-' prefixed class name
   document.getElementsByClassName(className)[0]
 
+# Google Analytics event tracking
+track = (category, action, label, value) ->
+  window.ga? 'send', 'event', category, action, label, value
+
 
 # Templates
 
@@ -141,9 +145,12 @@ renderTimeLeft = (secondsLeft) ->
 endTimerEvent = ->
   clearInterval(@counterId)
   document.body.classList.add('is-end-of-timer')
+
   getElem('js-timer-section').innerHTML = gameOverTemplate()
   getElem('js-header-button').innerHTML = newGameButtonTemplate()
+
   playRandomSound()
+
   setTimeout ->
     document.body.classList.remove('is-end-of-timer')
   , 7000
@@ -151,6 +158,7 @@ endTimerEvent = ->
   getElem('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
     document.body.classList.remove('is-end-of-timer')
+    track 'Game', 'Make New Game', 'From Game'
     false
 
   return
@@ -165,6 +173,7 @@ startCounter = (seconds) ->
     counter--
     if counter <= 0
       endTimerEvent()
+      track 'Game', 'End Game'
     else
       renderTimeLeft(counter)
   , 1000
@@ -177,6 +186,7 @@ startGame = ->
 
 makeNewGame = ->
   clearInterval(@counterId)
+  document.body.classList.remove('is-end-of-timer')
 
   data =
     letter: letterChooser()
@@ -188,22 +198,27 @@ makeNewGame = ->
 
   getElem('js-start-game').addEventListener 'click', (e) ->
     startGame()
+    track 'Game', 'Start New Game'
     false
 
   getElem('js-show-intro').addEventListener 'click', (e) ->
     renderIntro()
+    track 'Intro', 'Back to Intro from Game'
     false
 
   return
 
 renderIntro = ->
   clearInterval(@counterId)
+  document.body.classList.remove('is-end-of-timer')
+
   getElem('js-intro').innerHTML = introTemplate()
   getElem('js-game').innerHTML = ''
   getElem('js-header-button').innerHTML = newGameButtonTemplate isWhite: true
 
   getElem('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
+    track 'Game', 'Make New Game', 'From Intro'
     false
 
   return
