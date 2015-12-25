@@ -1,7 +1,7 @@
 letters = require '../data/letters.coffee'
 cats = require '../data/categories.coffee'
 sounds = require '../data/sounds.json'
-{ renderable, div, p, img, span, text, strong, a, button, ol, li, h1, h2 } = require 'teacup'
+{ renderable, div, p, img, span, text, strong, a, button, blockquote, ol, li, h1, h2 } = require 'teacup'
 
 @counterId = null
 
@@ -40,22 +40,42 @@ track = (category, action, label, value) ->
 # Templates
 
 introTemplate = renderable ->
-  howToText = "Get a lot of people together. Write 1 through 10 on many
-    sheets of paper and hand them out. Ready? Hit “Start”. You’ll get one
-    letter, ten categories, and two and a half minutes. Write down an answer
-    for each of the categories that starts with the letter. For example, you
-    get the letter “B” and category “Foods You Can Eat with a Fork or with
-    Your Hands”. That’s easy. “Burrito.” It can be a word or short phrase. Now
-    on to the next category. Hurry. Just write something down. Make it
-    original! Oh, you can’t use the same answer for multiple categories. What’s
-    that funny noise? It’s the end of the round. Phew. Now compare. Everyone
-    list off what they had for the first category. If nobody else had the same
-    answer, then you get a point for that category. If more than half the
-    people say, “No way. That doesn’t count.” then it doesn’t count. Now
-    compare the next category and so one. Keep track of the points if you want.
-    Click “New Game” for another round. Keep playing rounds until you fall
-    asleep. When you wake up, compare points. Ignore the points. Everybody wins.
-    Click “New Game”."
+  howToText = ->
+    ol ->
+      li ->
+        p "Get a bunch of people together around the screen. Have everyone
+          write 1 through 10 on sheets of paper. Ready? Hit “New Game” then
+          start."
+        blockquote "You can’t have too many people. It’s more fun with more
+          people."
+      li ->
+        p "You’ll get one letter, ten categories, and two and a half minutes.
+          Write an answer that fits into each of the categories that starts
+          with the letter. Make it original. You can’t use the same answer for
+          multiple categories."
+        blockquote "Need an example? You have the letter “B” and category
+          “Foods You Can Eat with a Fork or with Your Hands”. That’s easy!
+          “Burrito.”"
+        blockquote "An answer can be a word or a short phrase."
+      li ->
+        p "That funny noise means it’s the end of the round. Time to compare
+          answers. Everyone say what they had for the first category. If nobody
+          else had the same answer, you get a point. Compare the next category
+          and so on."
+        blockquote "You can put an answer to a vote. If half or more of
+          the players say, “No way. That doesn’t count.” then sorry, the group
+          has spoken. It doesn’t count."
+      li ->
+        p "Play another round by clicking “New Game”. If the group is feeling
+          competitive, keep track of the points and compare at the end. As long
+          as you laugh and have a good time, everyone wins."
+        blockquote "If you want, you can give multiple points for each word in
+          an answer that starts with the letter. For example, you would get
+          three points for “Black Bean Burrito”."
+        blockquote "For an extra challenge, don’t use adjectives for the first
+          word in the phrase."
+        blockquote "You may play all night so it’s best to have blankets and
+          pillows laying around in case people fall asleep."
 
   div '.logo', ->
     img '.logo-mark-image', src: '/images/logo-white.svg'
@@ -68,7 +88,7 @@ introTemplate = renderable ->
           strong "Pigeonhole"
       div '.intro-content-section', ->
         p '.intro-content-section-header', "How to Play"
-        p '.intro-content-section-details', howToText
+        div '.intro-content-section-details', howToText()
       div '.intro-content-section', ->
         p '.intro-content-section-header', "Made By"
         p '.intro-content-section-details', ->
