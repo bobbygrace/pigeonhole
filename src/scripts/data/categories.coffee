@@ -146,7 +146,6 @@ module.exports = [
   "Nail Polish Names"
   "What Mario Does in His Free Time"
   "Things That Take More Than an Hour To Do"
-  "Immortals"
   "Favorite Part of Titanic"
   "Stuff in the Sky"
   "Types of Cars"
