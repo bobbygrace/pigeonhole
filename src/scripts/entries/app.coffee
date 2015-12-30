@@ -1,82 +1,30 @@
+# Data
 letters = require '../data/letters.coffee'
 cats = require '../data/categories.coffee'
-sounds = require '../data/sounds.json'
-{ renderable, div, p, img, span, text, strong, a, button, blockquote, ol, li, h1, h2 } = require 'teacup'
 
+# Utils
+itemChooser = require '../utils/itemChooser.coffee'
+getMultipleItems = require '../utils/getMultipleItems.coffee'
+getElem = require '../utils/getElem.coffee'
+bodyClassList = require '../utils/bodyClassList.coffee'
+
+# Analytics
+track = require '../analytics/track.coffee'
+
+# Teacup
+{ renderable, div, p, img, span, text, strong, a, button, blockquote, ol, li,
+  h1, h2 } = require 'teacup'
+
+# Business
+playRandomSound = require '../lib/playRandomSound.coffee'
+
+# Variables
 @counterId = null
-
-
-# Utilities
-
-# http://stackoverflow.com/a/17891411
-randomNoRepeats = (array) ->
-  copy = array.slice(0)
-  ->
-    if copy.length < 1
-      copy = array.slice(0)
-    index = Math.floor(Math.random() * copy.length)
-    item = copy[index]
-    copy.splice index, 1
-    item
-
-getMultipleItems = (fn, num) ->
-  arr = []
-  i = 0
-  while i < num
-    arr.push fn()
-    i++
-  return arr
-
-
-getElem = (className) ->
-  # Takes only 'js-' prefixed class name
-  document.getElementsByClassName(className)[0]
-
-# Google Analytics event tracking
-track = (category, action, label, value) ->
-  window.ga? 'send', 'event', category, action, label, value
 
 
 # Templates
 
 introTemplate = renderable ->
-  howToText = ->
-    ol ->
-      li ->
-        p "Get a bunch of people together around the screen. Have everyone
-          write 1 through 10 on sheets of paper. Ready? Hit “New Game” then
-          start."
-        blockquote "You can’t have too many people. It’s more fun with more
-          people."
-      li ->
-        p "You’ll get one letter, ten categories, and two and a half minutes.
-          Write an answer that fits into each of the categories that starts
-          with the letter. Make it original. You can’t use the same answer for
-          multiple categories."
-        blockquote "Need an example? You have the letter “B” and category
-          “Foods You Can Eat with a Fork or with Your Hands”. That’s easy!
-          “Burrito.”"
-        blockquote "An answer can be a word or a short phrase."
-      li ->
-        p "That funny noise means it’s the end of the round. Time to compare
-          answers. Everyone say what they had for the first category. If nobody
-          else had the same answer, you get a point. Compare the next category
-          and so on."
-        blockquote "You can put an answer to a vote. If half or more of
-          the players say, “No way. That doesn’t count.” then sorry, the group
-          has spoken. It doesn’t count."
-      li ->
-        p "Play another round by clicking “New Game”. If the group is feeling
-          competitive, keep track of the points and compare at the end. As long
-          as you laugh and have a good time, everyone wins."
-        blockquote "If you want, you can give multiple points for each word in
-          an answer that starts with the letter. For example, you would get
-          three points for “Black Bean Burrito”."
-        blockquote "For an extra challenge, don’t use adjectives for the first
-          word in the phrase."
-        blockquote "You may play all night so it’s best to have blankets and
-          pillows laying around in case people fall asleep."
-
   div '.logo', ->
     img '.logo-mark-image', src: '/images/logo-white.svg'
 
@@ -88,7 +36,44 @@ introTemplate = renderable ->
           strong "Pigeonhole"
       div '.intro-content-section', ->
         p '.intro-content-section-header', "How to Play"
-        div '.intro-content-section-details', howToText()
+        div '.intro-content-section-details', ->
+
+          ol ->
+            li ->
+              p "Get a bunch of people together around the screen. Have everyone
+                write 1 through 10 on sheets of paper. Ready? Hit “New Game”
+                then start."
+              blockquote "You can’t have too many people. It’s more fun with
+                more people."
+            li ->
+              p "You’ll get one letter, ten categories, and two and a half
+                minutes. Write an answer that fits into each of the categories
+                that starts with the letter. Make it original. You can’t use the
+                same answer for multiple categories."
+              blockquote "Need an example? You have the letter “B” and category
+                “Foods You Can Eat with a Fork or with Your Hands”. That’s easy!
+                “Burrito.”"
+              blockquote "An answer can be a word or a short phrase."
+            li ->
+              p "That funny noise means it’s the end of the round. Time to
+                compare answers. Everyone say what they had for the first
+                category. If nobody else had the same answer, you get a point.
+                Compare the next category and so on."
+              blockquote "You can put an answer to a vote. If half or more of
+                the players say, “No way. That doesn’t count.” then sorry, the
+                group has spoken. It doesn’t count."
+            li ->
+              p "Play another round by clicking “New Game”. If the group is
+                feeling competitive, keep track of the points and compare at the
+                end. As long as you laugh and have a good time, everyone wins."
+              blockquote "If you want, you can give multiple points for each
+                word in an answer that starts with the letter. For example, you
+                would get three points for “Black Bean Burrito”."
+              blockquote "For an extra challenge, don’t use adjectives for the
+                first word in the phrase."
+              blockquote "You may play all night so it’s best to have blankets
+                and pillows laying around in case people fall asleep."
+
       div '.intro-content-section', ->
         p '.intro-content-section-header', "Made By"
         p '.intro-content-section-details', ->
@@ -127,11 +112,11 @@ gameOverTemplate = renderable ->
   div '.game-section-detail', ->
     p "Game Over!"
 
-newGameButtonTemplate = renderable ({ isWhite } = { isWhite: false}) ->
-  if isWhite
-    button '.mod-white.js-new-game', "New Game"
-  else
-    button '.js-new-game', "New Game"
+newGreenGameButtonTemplate = renderable ->
+  button '.js-new-game', "New Game"
+
+newWhiteGameButtonTemplate = renderable ->
+  button '.mod-white.js-new-game', "New Game"
 
 startButtonTemplate = renderable ->
   button '.js-start-game', "Start"
@@ -139,45 +124,33 @@ startButtonTemplate = renderable ->
 baseLayoutTemplate = renderable ->
   div '.js-intro'
   div '.js-game'
-  div '.button-section.js-header-button', ->
+  div '.button-section.js-header-button'
 
 
 # Business
 
-catChooser = randomNoRepeats(cats)
-letterChooser = randomNoRepeats(letters)
-audioChooser = randomNoRepeats(sounds)
-
-playRandomSound = ->
-  file = audioChooser()
-  audio = new Audio("/audio/#{file}")
-
-  audio.addEventListener 'ended', ->
-    audio.remove()
-
-  audio.play()
-
-  return
+catChooser = itemChooser(cats)
+letterChooser = itemChooser(letters)
 
 renderTimeLeft = (secondsLeft) ->
   getElem('js-time-left').innerHTML = secondsLeft.toString()
 
 endTimerEvent = ->
   clearInterval(@counterId)
-  document.body.classList.add('is-end-of-timer')
+  bodyClassList.add('is-end-of-timer')
 
   getElem('js-timer-section').innerHTML = gameOverTemplate()
-  getElem('js-header-button').innerHTML = newGameButtonTemplate()
+  getElem('js-header-button').innerHTML = newGreenGameButtonTemplate()
 
   playRandomSound()
 
   setTimeout ->
-    document.body.classList.remove('is-end-of-timer')
+    bodyClassList.remove('is-end-of-timer')
   , 7000
 
   getElem('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
-    document.body.classList.remove('is-end-of-timer')
+    bodyClassList.remove('is-end-of-timer')
     track 'Game', 'Make New Game', 'From Game'
     false
 
@@ -206,7 +179,7 @@ startGame = ->
 
 makeNewGame = ->
   clearInterval(@counterId)
-  document.body.classList.remove('is-end-of-timer')
+  bodyClassList.remove('is-end-of-timer')
 
   data =
     letter: letterChooser()
@@ -230,11 +203,11 @@ makeNewGame = ->
 
 renderIntro = ->
   clearInterval(@counterId)
-  document.body.classList.remove('is-end-of-timer')
+  bodyClassList.remove('is-end-of-timer')
 
   getElem('js-intro').innerHTML = introTemplate()
   getElem('js-game').innerHTML = ''
-  getElem('js-header-button').innerHTML = newGameButtonTemplate isWhite: true
+  getElem('js-header-button').innerHTML = newWhiteGameButtonTemplate()
 
   getElem('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
