@@ -14,17 +14,25 @@ playRandomSound = require '../lib/playRandomSound.coffee'
 
 # Data
 letters = require '../data/letters.coffee'
-cats = require '../data/categories.coffee'
+packs = require '../data/packs.coffee'
+packList = Object.keys(packs)
 
 # Variables
 @counterId = null
 
 
-
 # And now, the app…
 
-catChooser = itemChooser(cats)
+setPack = (pack) ->
+  @currentPack = pack ? 'original'
+  @catChooser = itemChooser(packs[@currentPack].categories)
+
+setPack('original')
+
 letterChooser = itemChooser(letters)
+
+
+# Counter stuff
 
 renderTimeLeft = (secondsLeft) ->
   fillElem 'js-time-left', secondsLeft.toString()
@@ -65,6 +73,9 @@ startCounter = (seconds) ->
       renderTimeLeft(counter)
   , 1000
 
+
+# Games
+
 startGame = ->
   fillElem 'js-header-button', ''
   getElem('js-game-container').classList.remove('is-blurred')
@@ -77,7 +88,7 @@ makeNewGame = ->
 
   data =
     letter: letterChooser()
-    catList: getMultipleItems(catChooser, 10)
+    catList: getMultipleItems(@catChooser, 10)
 
   fillElem 'js-game', t.game data
   fillElem 'js-intro', ''
@@ -94,6 +105,8 @@ makeNewGame = ->
     false
 
   return
+
+# App Intro
 
 renderIntro = ->
   clearInterval(@counterId)
