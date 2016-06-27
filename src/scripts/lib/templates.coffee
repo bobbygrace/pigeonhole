@@ -19,6 +19,12 @@ module.exports = {
           p '.intro-content-section-header', "This is"
           p '.intro-content-section-details', ->
             strong "Pigeonhole"
+
+        div '.intro-content-section', ->
+          p '.intro-content-section-header', "Packs"
+          div '.intro-content-section-details', ->
+            div '.js-pack-list'
+
         div '.intro-content-section', ->
           p '.intro-content-section-header', "How to Play"
           div '.intro-content-section-details', ->
@@ -67,6 +73,8 @@ module.exports = {
             text " and "
             a href: "http://madeleineburkart.com", "Madeleine Burkart"
 
+  packButton: renderable ({name, displayName}) ->
+    button '.mod-white.mod-pack.js-select-pack', {'data-name': name}, displayName
 
   game: renderable ({letter, catList}) ->
     div '.logo', ->

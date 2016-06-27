@@ -207,4 +207,10 @@ module.exports = {
       "Stuff"
     ]
 
+  "pack3":
+    "name": "Pack 3"
+    "categories": [
+      "Stuff"
+    ]
+
 }

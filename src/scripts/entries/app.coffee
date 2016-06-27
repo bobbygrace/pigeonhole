@@ -24,6 +24,8 @@ packList = Object.keys(packs)
 # And now, the app…
 
 setPack = (pack) ->
+  # don't destroy the cat chooser if we don't have to. it's holding state.
+  return if pack == @currentPack && pack?
   @currentPack = pack ? 'original'
   @catChooser = itemChooser(packs[@currentPack].categories)
 
@@ -106,6 +108,7 @@ makeNewGame = ->
 
   return
 
+
 # App Intro
 
 renderIntro = ->
@@ -116,18 +119,38 @@ renderIntro = ->
   fillElem 'js-game', ''
   fillElem 'js-header-button', t.newWhiteGameButton()
 
+  packButtons = []
+  for pack in packList
+    data =
+      name: pack
+      displayName: packs[pack].name
+    packButtons.push t.packButton(data)
+
+  fillElem 'js-pack-list', packButtons.join('')
+
   el('js-new-game').addEventListener 'click', (e) ->
+    setPack 'original'
     makeNewGame()
-    track 'Game', 'Make New Game', 'From Intro'
+    track 'Game', 'Make New Game', 'original, From Intro Header'
     false
+
+  for pack in packList
+    target = document.querySelectorAll("[data-name=#{pack}]")[0]
+    target.addEventListener 'click', (e) ->
+      name = e.currentTarget.getAttribute('data-name')
+      setPack name
+      makeNewGame()
+      track 'Game', 'Make New Game', "#{name}, From Intro Pack Section"
+      false
 
   return
 
+
+# Base
+
 renderBaseLayout = ->
   fillElem 'js-app', t.baseLayout()
-
   renderIntro()
-
   return
 
 renderBaseLayout()
