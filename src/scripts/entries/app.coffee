@@ -1,7 +1,7 @@
 # Utils
 itemChooser = require '../utils/itemChooser.coffee'
 getMultipleItems = require '../utils/getMultipleItems.coffee'
-getElem = require '../utils/getElem.coffee'
+el = require '../utils/getElem.coffee'
 fillElem = require '../utils/fillElem.coffee'
 bodyClassList = require '../utils/bodyClassList.coffee'
 
@@ -50,7 +50,7 @@ endTimerEvent = ->
     bodyClassList.remove('is-end-of-timer')
   , 7000
 
-  getElem('js-new-game').addEventListener 'click', (e) ->
+  el('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
     bodyClassList.remove('is-end-of-timer')
     track 'Game', 'Make New Game', 'From Game'
@@ -78,7 +78,7 @@ startCounter = (seconds) ->
 
 startGame = ->
   fillElem 'js-header-button', ''
-  getElem('js-game-container').classList.remove('is-blurred')
+  el('js-game-container').classList.remove('is-blurred')
   startCounter(150)
   return
 
@@ -94,12 +94,12 @@ makeNewGame = ->
   fillElem 'js-intro', ''
   fillElem 'js-header-button', t.startButton()
 
-  getElem('js-start-game').addEventListener 'click', (e) ->
+  el('js-start-game').addEventListener 'click', (e) ->
     startGame()
     track 'Game', 'Start New Game'
     false
 
-  getElem('js-show-intro').addEventListener 'click', (e) ->
+  el('js-show-intro').addEventListener 'click', (e) ->
     renderIntro()
     track 'Intro', 'Back to Intro from Game'
     false
@@ -116,7 +116,7 @@ renderIntro = ->
   fillElem 'js-game', ''
   fillElem 'js-header-button', t.newWhiteGameButton()
 
-  getElem('js-new-game').addEventListener 'click', (e) ->
+  el('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
     track 'Game', 'Make New Game', 'From Intro'
     false
