@@ -24,8 +24,8 @@
 // Base
 
 body {
-  font-size: 24px;
-  line-height: 1.4;
+  font-size: 25px;
+  line-height: 1.5;
   transition-property: background;
   transition-duration: 1000ms;
 }
@@ -42,38 +42,99 @@ body, input, textarea, button {
 }
 
 button {
-  background: none;
-  border: 4px solid @brand-color;
-  color: @brand-color;
-  border-radius: .5em;
+  background: linear-gradient(
+    to bottom,
+    @brand-color,
+    darken(@brand-color, 3%)
+  );
+  border: 0;
+  box-shadow: 0 3px hsla(0, 0%, 0%, .1);
+  color: #fff;
+  border-radius: 3em;
   font-weight: bold;
   line-height: 1.5em;
-  margin-left: .5em;
-  min-width: 180px;
+  margin: 0 .5em;
   padding: .3em 1em;
+  transition: transform .1s, box-shadow .1s;
 
   &:hover,
   &:focus {
-    background-color: @brand-color;
-    color: #fff;
+    background: linear-gradient(
+      to bottom,
+      darken(@brand-color, 5%),
+      darken(@brand-color, 8%)
+    );
+    box-shadow: 0 2px hsla(0, 0%, 0%, .2);
+    // transform: translateY(1px);
     outline: none;
   }
 
   &:active {
-    opacity: .8;
+    background: linear-gradient(
+      to bottom,
+      darken(@brand-color, 10%),
+      darken(@brand-color, 13%)
+    );
+    box-shadow: 0 1px hsla(0, 0%, 0%, 1);
+    transform: translateY(4px);
   }
 
 }
 
-  button.mod-white {
-    background-color: @brand-color;
-    border-color: #fff;
-    color: #fff;
+  button.mod-big-time {
+    border-radius: 2em;
+    display: inline-block;
+    margin: 0;
+    padding: 1em 4em;
+    box-shadow:
+      0 3px 50px hsla(0, 0%, 100%, 1),
+      0 0 10px hsla(0, 0%, 100%, 1);
 
     &:hover,
     &:focus {
-      background-color: #fff;
+      // transform: translateY(2px);
+    }
+
+    &:active {
+      transform: translateY(4px);
+    }
+
+  }
+
+  button.mod-button-bar {
+    display: inline-block;
+    height: 48px;
+    margin-right: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  button.mod-white {
+    background: linear-gradient(
+      to bottom,
+      #fff,
+      darken(#fff, 3%)
+    );
+    color: @brand-color;
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(
+        to bottom,
+        darken(#fff, 5%),
+        darken(#fff, 8%)
+      );
+      box-shadow: 0 2px hsla(0, 0%, 0%, .2);
       color: @brand-color;
+    }
+
+    &:active {
+      background: linear-gradient(
+        to bottom,
+        darken(#fff, 10%),
+        darken(#fff, 13%)
+      );
+      box-shadow: 0 1px hsla(0, 0%, 0%, .5);
     }
 
   }
@@ -91,66 +152,6 @@ blockquote {
   border-left: .15em solid hsla(0, 0%, 100%, .2);
   margin-left: 0;
   padding: 0 0 0 .9em;
-}
-
-// Logo
-
-.logo {
-  margin: 32px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 300;
-}
-
-  .logo-mark {
-    float: left;
-    cursor: pointer;
-    margin-right: .5em;
-  }
-
-    .logo-mark-image {
-      height: 64px;
-      width: 64px;
-    }
-
-    .logo-mark-image.mod-clickable {
-      transition-duration: 250ms;
-      transition-property: opacity transform;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-
-      &:active {
-        opacity: .8;
-      }
-
-    }
-
-@media @small {
-
-  .logo {
-    margin: 32px;
-  }
-
-  .logo-mark-image {
-    height: 48px;
-    width: 48px;
-  }
-
-}
-
-
-// New Game Button
-
-.button-section {
-  margin: 32px;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 200;
 }
 
 
@@ -204,8 +205,8 @@ blockquote {
 // Game
 
 .game {
-  margin: 96px auto;
-  max-width: 33em;
+  margin: 48px auto 0;
+  max-width: 40em;
   position: relative;
   text-align: center;
   transition-duration: 250ms;
@@ -260,7 +261,7 @@ blockquote {
 @media @small {
 
   .game {
-    margin: 96px 24px;
+    margin: 80px 24px;
   }
 
   .game-section.mod-left,
@@ -285,6 +286,81 @@ blockquote {
 .category-list {
   margin-top: .6em;
   padding-left: 2em;
+}
+
+
+// Button Bar
+
+.button-bar {
+  margin: 0 1.5em 1.5em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+
+  .button-bar-left-section {
+    float: left;
+  }
+
+  .button-bar-right-section {
+    float: right;
+  }
+
+
+// Logo
+
+.logo-button {
+  color: @brand-color;
+  display: block;
+  height: 48px;
+  text-decoration: none;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:active {
+    opacity: .6;
+  }
+
+}
+
+  .logo-button-image {
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    vertical-align: middle;
+  }
+
+  .logo-button-text {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 0 0 16px;
+    vertical-align: middle;
+  }
+
+
+// Center overlay
+
+.center-overlay {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  align-items: center;
+  background-image:
+    radial-gradient(
+      hsla(0, 0%, 100%, .8),
+      hsla(0, 0%, 100%, .2)
+    );
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
 }
 
 

@@ -7,11 +7,10 @@ module.exports = {
   baseLayout: renderable ->
     div '.js-intro'
     div '.js-game'
-    div '.button-section.js-header-button'
+    div '.js-overlay'
+    return
 
   intro: renderable ->
-    div '.logo', ->
-      img '.logo-mark-image', src: '/images/logo-white.svg'
 
     div '.intro', ->
       div '.intro-content', ->
@@ -77,9 +76,6 @@ module.exports = {
     button '.mod-white.mod-pack.js-select-pack', {'data-name': name}, displayName
 
   game: renderable ({letter, catList}) ->
-    div '.logo', ->
-      a '.logo-mark.js-show-intro', href: '#', title: 'Show introduction', ->
-        img '.logo-mark-image.mod-clickable', src: '/images/logo-green.svg'
 
     div '.game.is-blurred.js-game-container', ->
 
@@ -97,6 +93,23 @@ module.exports = {
             for cat in catList
               li cat
 
+    div '.button-bar', ->
+
+      div '.button-bar-left-section', ->
+        a '.logo-button.js-show-intro', href: '#', title: 'Go back', ->
+          img '.logo-button-image', src: '/images/logo-green.svg'
+          span '.logo-button-text', "Pigeonhole"
+
+      div '.button-bar-right-section.js-fill-button-bar', ->
+
+
+  startGameOverlay: renderable ->
+    div '.center-overlay.js-section-start-game', ->
+      button '.mod-big-time.js-start-game', "Start"
+
+  gameOverButtons: renderable ->
+    button '.mod-button-bar.js-new-game', "New Game"
+
   timer: renderable ->
     p '.game-section-header', "Time"
     div '.game-section-detail', ->
@@ -105,12 +118,6 @@ module.exports = {
   gameOver: renderable ->
     div '.game-section-detail', ->
       p "Game Over!"
-
-  newGreenGameButton: renderable ->
-    button '.js-new-game', "New Game"
-
-  newWhiteGameButton: renderable ->
-    button '.mod-white.js-new-game', "New Game"
 
   startButton: renderable ->
     button '.js-start-game', "Start"

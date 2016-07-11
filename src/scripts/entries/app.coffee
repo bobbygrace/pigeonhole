@@ -44,7 +44,6 @@ endTimerEvent = ->
   bodyClassList.add('is-end-of-timer')
 
   fillElem 'js-timer-section', t.gameOver()
-  fillElem 'js-header-button', t.newGreenGameButton()
 
   playRandomSound()
 
@@ -64,6 +63,7 @@ startCounter = (seconds) ->
   counter = seconds
 
   fillElem 'js-timer-section', t.timer()
+  fillElem 'js-fill-button-bar', t.gameOverButtons()
   renderTimeLeft(counter)
 
   @counterId = setInterval ->
@@ -79,8 +79,8 @@ startCounter = (seconds) ->
 # Games
 
 startGame = ->
-  fillElem 'js-header-button', ''
   el('js-game-container').classList.remove('is-blurred')
+  fillElem 'js-overlay', ''
   startCounter(150)
   return
 
@@ -94,7 +94,7 @@ makeNewGame = ->
 
   fillElem 'js-game', t.game data
   fillElem 'js-intro', ''
-  fillElem 'js-header-button', t.startButton()
+  fillElem 'js-overlay', t.startGameOverlay()
 
   el('js-start-game').addEventListener 'click', (e) ->
     startGame()
@@ -117,7 +117,7 @@ renderIntro = ->
 
   fillElem 'js-intro', t.intro()
   fillElem 'js-game', ''
-  fillElem 'js-header-button', t.newWhiteGameButton()
+  fillElem 'js-overlay', ''
 
   packButtons = []
   for pack in packList
@@ -127,12 +127,6 @@ renderIntro = ->
     packButtons.push t.packButton(data)
 
   fillElem 'js-pack-list', packButtons.join('')
-
-  el('js-new-game').addEventListener 'click', (e) ->
-    setPack 'original'
-    makeNewGame()
-    track 'Game', 'Make New Game', 'original, From Intro Header'
-    false
 
   for pack in packList
     target = document.querySelectorAll("[data-name=#{pack}]")[0]
