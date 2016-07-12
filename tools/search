@@ -1,0 +1,27 @@
+#!/usr/bin/env coffee
+
+packs = require '../src/scripts/data/packs.coffee'
+packNames = Object.keys(packs)
+
+arg = process.argv[2]
+
+regex = /// #{arg} ///gi
+
+for n in packNames
+  pack = packs[n]
+  name = pack.name
+  hasACatInThisPack = false
+  cats = pack.categories
+  matchList = []
+
+  for cat in cats
+    if regex.test cat
+      hasACatInThisPack = true
+      matchList.push cat
+
+  if hasACatInThisPack
+    console.log "\n"
+    console.log "#{name}"
+    l = name.length
+    console.log ("=" for i in [0...l]).join('')
+    console.log matchList.join('\n')

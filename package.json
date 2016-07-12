@@ -4,11 +4,12 @@
   "description": "A game",
   "author": "Bobby Grace",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/bobbygrace/pigeonhole"
+    "type": "git",
+    "url": "https://github.com/bobbygrace/pigeonhole"
   },
   "dependencies": {
     "browserify": "~9.0.3",
+    "cli-table": "^0.3.1",
     "coffee-script": "~1.9.1",
     "coffeeify": "~1.0.0",
     "config": "~1.12.0",
@@ -23,6 +24,7 @@
     "less-plugin-autoprefix": "~1.4.0",
     "nodemon": "~1.3.7",
     "st": "~0.5.3",
+    "stopwords": "0.0.5",
     "teacup": "^2.0.0",
     "uglifyify": "~3.0.1",
     "watchify": "~2.5.0"

@@ -1,0 +1,74 @@
+#!/usr/bin/env coffee
+
+packs = require '../src/scripts/data/packs.coffee'
+packNames = Object.keys(packs)
+
+Table = require 'cli-table'
+countTable = new Table()
+dupeTable = new Table()
+
+stopwords = require('stopwords').english
+_ = require 'underscore'
+
+
+
+# Check for possible duplicates…
+
+allCategories = []
+allKeywords = []
+keywordsString = ''
+
+for pack in packNames
+  cats = packs[pack].categories
+  allCategories = allCategories.concat cats
+
+console.log '\n\n\ \ POSSIBLE DUPLICATES\n'
+
+allKeywords = allCategories.join(' ').toLowerCase().split(' ')
+kwNoStopwords = _.difference allKeywords, stopwords
+
+# Counting the occurrences of JavaScript array elements
+# http://stackoverflow.com/questions/5667888
+counts = {}
+i = 0
+while i < kwNoStopwords.length
+  num = kwNoStopwords[i]
+  counts[num] = if counts[num] then counts[num] + 1 else 1
+  i++
+
+
+# Sorting JavaScript Object by property value
+# http://stackoverflow.com/questions/1069666
+
+sortedCounts = []
+
+for count of counts
+  sortedCounts.push [
+    count
+    counts[count]
+  ]
+
+sortedCounts.sort (a, b) ->
+  (b[1]) - a[1]
+
+dupeTable.push ['WORD', 'COUNT']
+for arr in sortedCounts
+  if arr[1] > 1
+    dupeTable.push arr
+
+console.log dupeTable.toString()
+
+
+
+# Get the count for each pack
+
+console.log '\n\n\ \ COUNTS\n'
+
+countTable.push ['PACK', 'NUMBER']
+
+for pack in packNames
+  name = packs[pack].name
+  length = packs[pack].categories.length
+  countTable.push [name, length]
+
+console.log countTable.toString()
