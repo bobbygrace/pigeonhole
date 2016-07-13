@@ -181,8 +181,8 @@ module.exports = {
       "Flavors"
       "Street Names"
       "I Made It Myself!"
-      "A Portmanteau (Blending Two Words)"
-      "A Palindrome"
+      "Portmanteaus (Blending Two Words)"
+      "Palindromes"
       "Chatroom Names"
       "Living Things"
       "Playlist Names"
@@ -204,7 +204,7 @@ module.exports = {
   "halloween":
     "name": "Halloween"
     "categories": [
-      "Stuff you carve in a pumpkin"
+      "Stuff You Carve in a Pumpkin"
       "Epitaphs"
       "Murder Weapons"
       "Hats That Can Be Costumes"
@@ -227,7 +227,6 @@ module.exports = {
       "Scary Noise"
       "Organs (All Kinds)"
       "Places to Hide a Dead Body"
-      "Puns (Scary)"
       "Ghost Stuff"
       "Halloween Colors"
       "Historical Costumes"
@@ -239,6 +238,10 @@ module.exports = {
       "Things That Can Be Mummified"
       "Places (Scary)"
       "Six Word Halloween Stories"
+      "Nightmares"
+      "Signs You’re Possessed"
+      "Illusions"
+      "Monsters"
     ]
 
   "school":
@@ -263,13 +266,18 @@ module.exports = {
       "Textbook Names"
       "Middle School Memories"
       "Electives"
+      "Signs of Senioritis"
+      "Sticker on your Locker"
+      "Excuses for Being Late"
+      "Reasons You Didn’t Turn in Your Homework"
+      "A College Class"
     ]
 
   "animals":
     "name": "Animals"
     "categories": [
       "Things with Tails"
-      "Bigger Than a Breadbox"
+      "Animals Bigger Than a Breadbox"
       "Mammals"
       "Amphibians"
       "I Came from an Egg?"
@@ -281,7 +289,7 @@ module.exports = {
       "Animals That “Get It”"
       "Extinct Animals"
       "Stinky Animals"
-      "I Got Big Eyes"
+      "I Got Big Eyes!"
       "Camoflage Buddies"
       "Animals in a Zoo"
       "Animals from Movies"
@@ -310,7 +318,7 @@ module.exports = {
       "Dinosaurs"
       "Scary Animals"
       "Loud Animals"
-      "Smaller Than a Breadbox"
+      "Animals Smaller Than a Breadbox"
       "Animals That Weigh More than 1,000 pounds"
       "Mountain Animals"
       "Creatures of the Plains"
@@ -321,6 +329,10 @@ module.exports = {
       "Mythical Animals"
       "Where You Can Ride a Pegasus"
       "Owl or Fowl"
+      "Racehorse Names"
+      "Dumb Names for Pets"
+      "Cute Things Pets Do"
+      "Things Pets Would Say"
     ]
 
   "vacation":
@@ -414,7 +426,7 @@ module.exports = {
       "Sips"
       "Mexican Foods"
       "Green Food"
-      "Something with Dairy"
+      "Stuff with Dairy in It"
       "Vegan Foods"
       "Paleo Foods"
       "French Foods"
@@ -451,6 +463,11 @@ module.exports = {
       "Grilled Foods"
       "Nutritious Foods"
       "Foods You Can Cover in Chocolate"
+      "Foods You Can Eat with a Fork or with Your Hands"
+      "Stuff You Don’t Want to Eat"
+      "Items on the Olive Garden Menu"
+      "Flavors"
+      "Bad Gourmet Restaurant Names"
     ]
 
   "winter":
@@ -462,7 +479,7 @@ module.exports = {
       "Winter Holidays"
       "Winter Storms"
       "Where Old Man Winter Lives"
-      "Wintet Monsters"
+      "Winter Monsters"
       "Places You WANT to Get Stuck in an Ice Storm"
       "Things to Make Out of Snow"
       "Winter Treats"
@@ -503,7 +520,6 @@ module.exports = {
       "Holiday Miracle"
       "New Years Resolution"
       "Winter Formal Themes"
-
     ]
 
   "hard":
