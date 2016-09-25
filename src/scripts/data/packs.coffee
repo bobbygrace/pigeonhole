@@ -242,6 +242,13 @@ module.exports = {
       "Signs You’re Possessed"
       "Illusions"
       "Monsters"
+      "Supernatural Disasters"
+      "Things That Jump or Bounce"
+      "Orange Things"
+      "Who Ya Gonna Call?"
+      "Signs Ghosts Are Real"
+      "World Records (Scary)"
+      "Horror Movie Titles"
     ]
 
   "school":
@@ -353,13 +360,14 @@ module.exports = {
       "Animals with Spots"
       "Green Animals"
       "Fuzzy"
-      "Mythical Animals"
       "Where You Can Ride a Pegasus"
       "Owl or Fowl"
       "Racehorse Names"
       "Dumb Names for Pets"
       "Cute Things Pets Do"
       "Things Pets Would Say"
+      "Stuff Snake People Complain About"
+      "Animal Puns"
     ]
 
   "vacation":
