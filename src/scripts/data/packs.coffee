@@ -199,6 +199,19 @@ module.exports = {
       "Five Letter Words"
       "Made Up Sports Teams"
       "Mascots"
+      "Crossfit Exercises"
+      "Band Names"
+      "Instruments (Musical or Medical)"
+      "Things You Get Delivered"
+      "Units of Measure"
+      "Good Ideas"
+      "Words to Live By"
+      "Energy Source"
+      "Religious Symbols"
+      "Things That Are Trending"
+      "Cities"
+      "Secret"
+      "The Key"
     ]
 
   "halloween":
@@ -368,6 +381,10 @@ module.exports = {
       "Things Pets Would Say"
       "Stuff Snake People Complain About"
       "Animal Puns"
+      "Spirit Animals"
+      "Animal Sounds"
+      "Things with Paws"
+      "Things with Talons"
     ]
 
   "vacation":
@@ -503,6 +520,7 @@ module.exports = {
       "Pizza Toppings"
       "Burger Toppings"
       "Salad Toppings"
+      "Salad Ingredients"
       "Seafood"
       "Utensils"
       "Napkin Patterns"
@@ -532,6 +550,14 @@ module.exports = {
       "Items on the Olive Garden Menu"
       "Flavors"
       "Bad Gourmet Restaurant Names"
+      "Bakery Exercises"
+      "Trendy Food"
+      "Crops"
+      "Food for Sea Creatures"
+      "Food Truck Types"
+      "Gross Food"
+      "Vegan Options"
+      "Bagel Flavor"
     ]
 
   "winter":
@@ -619,6 +645,8 @@ module.exports = {
       "Geological Formations"
       "Succulents"
       "Academy Award Winners from 1966"
+      "Quantum Theory in One Word"
+      "Plays from 1995"
     ]
 
 }
