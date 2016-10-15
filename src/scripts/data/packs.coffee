@@ -262,6 +262,19 @@ module.exports = {
       "Signs Ghosts Are Real"
       "World Records (Scary)"
       "Horror Movie Titles"
+      "Why is This House Haunted?"
+      "Songs on a Halloween Playlist"
+      "Snacks at a Halloween Party"
+      "Halloween Decorations"
+      "What Freddy Krueger Does in His Free Time"
+      "Alien Stuff"
+      "What‘s That Sound?"
+      "Vampire Stuff"
+      "Clown Sighting Locations"
+      "Group Costume Ideas"
+      "Halloween Pranks"
+      "What To Do if You See a Monster"
+      "After School Snacks"
     ]
 
   "school":
@@ -318,6 +331,18 @@ module.exports = {
       "Books to Read for English Class"
       "Things You Do When There’s a Substitute"
       "College Party Themes"
+      "Homework Assignment"
+      "Something on a College Application"
+      "Reasons for a Scholarship"
+      "Math Stuff"
+      "Music Class Items"
+      "Art Class Items"
+      "Reasons to Go to the Nurse"
+      "Teacher Names"
+      "Dress Code Rule"
+      "Embarassing Things at School"
+      "Reasons to Pass a Note"
+      ""
     ]
 
   "animals":
@@ -385,6 +410,12 @@ module.exports = {
       "Animal Sounds"
       "Things with Paws"
       "Things with Talons"
+      "Smart Animals"
+      "Names for a Fish"
+      "Bird Stuff"
+      "Famous Animals"
+      "What Would a Cow Say?"
+      "Pet Store Items"
     ]
 
   "vacation":
@@ -458,6 +489,11 @@ module.exports = {
       "Good Places to Hike"
       "People You Meet on Buses"
       "Pictures on a Jigsaw Puzzle"
+      "Spa Names"
+      "Adjective to Describe Towels"
+      "Weenend Getaways"
+      "Reasons You Need a Vacation"
+      "Worst Time to Take a Vacation"
     ]
 
   "food":
@@ -558,6 +594,7 @@ module.exports = {
       "Gross Food"
       "Vegan Options"
       "Bagel Flavor"
+      "Something You Can Make Pumpkin Spice Flavored"
     ]
 
   "winter":
@@ -610,6 +647,9 @@ module.exports = {
       "Holiday Miracle"
       "New Years Resolution"
       "Winter Formal Themes"
+      "Worst Thing to Wear on a Cold Day"
+      "Name for a Sled Dog"
+      "Reason to Fear Frosty the Snowman"
     ]
 
   "hard":
