@@ -274,7 +274,6 @@ module.exports = {
       "Group Costume Ideas"
       "Halloween Pranks"
       "What To Do if You See a Monster"
-      "After School Snacks"
     ]
 
   "school":
@@ -342,7 +341,7 @@ module.exports = {
       "Dress Code Rule"
       "Embarassing Things at School"
       "Reasons to Pass a Note"
-      ""
+      "After School Snacks"
     ]
 
   "animals":
@@ -494,6 +493,7 @@ module.exports = {
       "Weenend Getaways"
       "Reasons You Need a Vacation"
       "Worst Time to Take a Vacation"
+      "Worst Thing to Happen in a Car"
     ]
 
   "food":
@@ -521,7 +521,7 @@ module.exports = {
       "Ice Cream Flavors"
       "Foods for Robots or Cars"
       "Futuristic Foods"
-      "Gross"
+      "Gross Foods"
       "Slimy Foods"
       "After School Snacks"
       "Long Thin Things"
@@ -539,7 +539,7 @@ module.exports = {
       "Movie Snacks"
       "Baseball Game Snacks"
       "Dips"
-      "Chips"
+      "Chips?"
       "Sips"
       "Mexican Foods"
       "Green Food"
@@ -569,7 +569,7 @@ module.exports = {
       "Savory Something"
       "Hard to Eat Foods"
       "Spicy Foods"
-      "Sweats"
+      "Sweets"
       "Bigger Than a Breadbox"
       "Breads"
       "How Bad is Gluten?"
