@@ -1,5 +1,6 @@
-itemChooser = require '../utils/itemChooser.coffee'
-sounds = require '../data/sounds.json'
+import itemChooser from '../utils/itemChooser.coffee'
+import sounds from '../data/sounds.json'
+
 audioChooser = itemChooser(sounds)
 
 module.exports = ->

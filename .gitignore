@@ -1,3 +1,4 @@
 /public/js
 /public/*.html
 /public/css
+node_modules

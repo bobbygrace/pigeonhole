@@ -1,6 +1,6 @@
 # Teacup
-{ renderable, div, p, img, span, text, strong, a, button, blockquote, ol, li,
-  h1, h2 } = require 'teacup'
+import { renderable, div, p, img, span, text, strong, a, button, blockquote,
+  ol, li, h1, h2 } from 'teacup'
 
 module.exports = {
 

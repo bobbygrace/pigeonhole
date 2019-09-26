@@ -1,33 +1,34 @@
 # Utils
-itemChooser = require '../utils/itemChooser.coffee'
-getMultipleItems = require '../utils/getMultipleItems.coffee'
-el = require '../utils/getElem.coffee'
-fillElem = require '../utils/fillElem.coffee'
-bodyClassList = require '../utils/bodyClassList.coffee'
+import itemChooser from '../utils/itemChooser.coffee'
+import getMultipleItems from '../utils/getMultipleItems.coffee'
+import el from '../utils/getElem.coffee'
+import fillElem from '../utils/fillElem.coffee'
+import bodyClassList from '../utils/bodyClassList.coffee'
 
 # Analytics
-track = require '../analytics/track.coffee'
+import track from '../analytics/track.coffee'
 
 # Our app stuff…
-t = require '../lib/templates.coffee'
-playRandomSound = require '../lib/playRandomSound.coffee'
+import t from '../lib/templates.coffee'
+import playRandomSound from '../lib/playRandomSound.coffee'
 
 # Data
-letters = require '../data/letters.coffee'
-packs = require '../data/packs.coffee'
+import letters from '../data/letters.coffee'
+import packs from '../data/packs.coffee'
 packList = Object.keys(packs)
 
 # Variables
-@counterId = null
+window.counterId = 0
+window.currentPack = null
 
 
 # And now, the app…
 
 setPack = (pack) ->
   # don't destroy the cat chooser if we don't have to. it's holding state.
-  return if pack == @currentPack && pack?
-  @currentPack = pack ? 'original'
-  @catChooser = itemChooser(packs[@currentPack].categories)
+  return if pack == window.currentPack && pack?
+  window.currentPack = pack ? 'original'
+  window.catChooser = itemChooser(packs[window.currentPack].categories)
 
 setPack('original')
 
@@ -40,7 +41,7 @@ renderTimeLeft = (secondsLeft) ->
   fillElem 'js-time-left', secondsLeft.toString()
 
 endTimerEvent = ->
-  clearInterval(@counterId)
+  clearInterval(window.counterId)
   bodyClassList.add('is-end-of-timer')
 
   fillElem 'js-timer-section', t.gameOver()
@@ -66,7 +67,7 @@ startCounter = (seconds) ->
   fillElem 'js-fill-button-bar', t.gameOverButtons()
   renderTimeLeft(counter)
 
-  @counterId = setInterval ->
+  window.counterId = setInterval ->
     counter--
     if counter <= 0
       endTimerEvent()
@@ -85,12 +86,12 @@ startGame = ->
   return
 
 makeNewGame = ->
-  clearInterval(@counterId)
+  clearInterval(window.counterId)
   bodyClassList.remove('is-end-of-timer')
 
   data =
     letter: letterChooser()
-    catList: getMultipleItems(@catChooser, 10)
+    catList: getMultipleItems(window.catChooser, 10)
 
   fillElem 'js-game', t.game data
   fillElem 'js-intro', ''
@@ -112,7 +113,7 @@ makeNewGame = ->
 # App Intro
 
 renderIntro = ->
-  clearInterval(@counterId)
+  clearInterval(window.counterId)
   bodyClassList.remove('is-end-of-timer')
 
   fillElem 'js-intro', t.intro()
