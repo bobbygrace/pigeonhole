@@ -14,61 +14,41 @@ module.exports = {
 
     div '.intro', ->
       div '.intro-content', ->
-        div '.intro-content-section', ->
-          p '.intro-content-page-header', "Pigeonhole"
+        div '.intro-header', ->
+          div '.logo', ->
+            img '.logo-image', src: '/images/logo-light.svg'
+            h1 '.logo-text', "Pigeonhole"
+          p '.intro-header-opening', "A word game of categories."
 
-        div '.intro-content-section', ->
-          p '.intro-content-section-header', "Packs"
+        div '.intro-packs', ->
+          h2 '.intro-content-section-header', "Select a Pack"
           div '.intro-content-section-details', ->
             div '.js-pack-list'
 
         div '.intro-content-section', ->
-          p '.intro-content-section-header', "How to Play"
+          h2 '.intro-content-section-header', "How to Play"
           div '.intro-content-section-details', ->
 
             ol ->
               li ->
-                p "Get a bunch of people together around the screen. Have
-                  everyone write 1 through 10 on sheets of paper. Ready? Hit
-                  “New Game” then start."
-                blockquote "You can’t have too many people. It’s more fun with
-                  more people."
+                p "Gather a group of friends around the screen.
+                The more the merrier! There's no player limit."
               li ->
-                p "You’ll get one letter, ten categories, and two and a half
-                  minutes. Write an answer that fits into each of the categories
-                  that starts with the letter. Make it original. You can’t use
-                  the same answer for multiple categories."
-                blockquote "Need an example? You have the letter “B” and
-                  category “Foods You Can Eat with a Fork or with Your Hands”.
-                  That’s easy! “Burrito.”"
-                blockquote "An answer can be a word or a short phrase."
+                p "When you start a game, you get one letter,
+                  ten categories, and two and a half minutes."
               li ->
-                p "That funny noise means it’s the end of the round. Time to
-                  compare answers. Everyone say what they had for the first
-                  category. If nobody else had the same answer, you get a point.
-                  Compare the next category and so on."
-                blockquote "You can put an answer to a vote. If half or more of
-                  the players say, “No way. That doesn’t count.” then sorry, the
-                  group has spoken. It doesn’t count."
+                p "You and your friends scramble to find words or phrases that
+                  start with the given letter for each category."
               li ->
-                p "Play another round by clicking “New Game”. If the group is
-                  feeling competitive, keep track of the points and compare at
-                  the end. As long as you laugh and have a good time, everyone
-                  wins."
-                blockquote "If you want, you can give multiple points for each
-                  word in an answer that starts with the letter. For example,
-                  you would get three points for “Black Bean Burrito”."
-                blockquote "For an extra challenge, don’t use adjectives for the
-                  first word in the phrase."
-                blockquote "You may play all night so it’s best to have blankets
-                  and pillows laying around in case people fall asleep."
+                p "A timer will go off at the end of the game. Compare answers.
+                  For each unique answer, you get a point."
 
         div '.intro-content-section', ->
-          p '.intro-content-section-header', "Made By"
           p '.intro-content-section-details', ->
-            a href: "http://bobbygrace.info", "Bobby Grace"
+            text "Made by "
+            a href: "http://bobbygrace.info", "Bobby"
             text " and "
-            a href: "http://madeleineburkart.com", "Madeleine Burkart"
+            a href: "http://madeleineburkart.com", "Madeleine Grace"
 
   packButton: renderable ({name, displayName}) ->
     button '.mod-pack.js-select-pack', {'data-name': name}, displayName

@@ -131,20 +131,29 @@ li {
   .intro-content {
     margin: 96px auto;
     padding: 0 128px;
-    max-width: 720px;
+    max-width: 656px;
   }
 
     .intro-content-section {
-      margin-bottom: 32px;
+      margin: 96px 0;
     }
 
-      .intro-content-page-header {
-        .m-header();
-        margin: 0;
+      .intro-header {
+        margin: 96px auto;
+        text-align: center;
+      }
+
+        .intro-header-opening {
+          margin: 24px 0;
+        }
+
+      .intro-packs {
+        text-align: center;
+        margin: 64px 0;
       }
 
       .intro-content-section-header {
-        .m-subheader();
+        .m-header();
         margin: 0;
       }
 
@@ -324,7 +333,32 @@ li {
   }
 
 
+// Logo
+// Used in the intro
+
+.logo {
+  height: 48px;
+  padding: 8px;
+}
+
+  .logo-image {
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    vertical-align: middle;
+  }
+
+  .logo-text {
+    display: inline-block;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 48px;
+    margin: 0 8px 0 16px;
+    vertical-align: middle;
+  }
+
 // Logo Button
+// Used in the game screen.
 
 .logo-button {
   color: @brand-color;
