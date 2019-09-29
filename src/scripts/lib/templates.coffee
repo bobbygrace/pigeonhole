@@ -15,9 +15,7 @@ module.exports = {
     div '.intro', ->
       div '.intro-content', ->
         div '.intro-content-section', ->
-          p '.intro-content-section-header', "This is"
-          p '.intro-content-section-details', ->
-            strong "Pigeonhole"
+          p '.intro-content-page-header', "Pigeonhole"
 
         div '.intro-content-section', ->
           p '.intro-content-section-header', "Packs"
@@ -73,7 +71,7 @@ module.exports = {
             a href: "http://madeleineburkart.com", "Madeleine Burkart"
 
   packButton: renderable ({name, displayName}) ->
-    button '.mod-white.mod-pack.js-select-pack', {'data-name': name}, displayName
+    button '.mod-pack.js-select-pack', {'data-name': name}, displayName
 
   game: renderable ({letter, catList}) ->
 
@@ -91,13 +89,13 @@ module.exports = {
         div '.game-section-detail', ->
           ol '.category-list.js-categories', ->
             for cat in catList
-              li cat
+              li '.category-list-item', cat
 
     div '.button-bar', ->
 
       div '.button-bar-left-section', ->
         a '.logo-button.js-show-intro', href: '#', title: 'Go back', ->
-          img '.logo-button-image', src: '/images/logo-green.svg'
+          img '.logo-button-image', src: '/images/logo-light.svg'
           span '.logo-button-text', "Pigeonhole"
 
       div '.button-bar-right-section.js-fill-button-bar', ->
@@ -105,7 +103,7 @@ module.exports = {
 
   startGameOverlay: renderable ->
     div '.center-overlay.js-section-start-game', ->
-      button '.mod-big-time.js-start-game', "Start"
+      button '.js-start-game', "Start"
 
   gameOverButtons: renderable ->
     button '.mod-button-bar.js-new-game', "New Game"
@@ -113,11 +111,11 @@ module.exports = {
   timer: renderable ->
     p '.game-section-header', "Time"
     div '.game-section-detail', ->
-      p '.js-time-left'
+      p '.game-timer.js-time-left'
 
   gameOver: renderable ->
     div '.game-section-detail', ->
-      p "Game Over!"
+      p '.game-timer', "Game Over!"
 
   startButton: renderable ->
     button '.js-start-game', "Start"
