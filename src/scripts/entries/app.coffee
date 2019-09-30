@@ -52,6 +52,8 @@ endTimerEvent = ->
     bodyClassList.remove('is-end-of-timer')
   , 7000
 
+  fillElem 'js-fill-button-bar', t.gameOverButtons()
+
   el('js-new-game').addEventListener 'click', (e) ->
     makeNewGame()
     bodyClassList.remove('is-end-of-timer')
@@ -64,7 +66,7 @@ startCounter = (seconds) ->
   counter = seconds
 
   fillElem 'js-timer-section', t.timer()
-  fillElem 'js-fill-button-bar', t.gameOverButtons()
+  fillElem 'js-fill-button-bar', ''
   renderTimeLeft(counter)
 
   window.counterId = setInterval ->
