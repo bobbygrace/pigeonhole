@@ -55,6 +55,7 @@ endTimerEvent = ->
   fillElem 'js-fill-button-bar', t.gameOverButtons()
 
   el('js-new-game').addEventListener 'click', (e) ->
+    e.preventDefault()
     makeNewGame()
     bodyClassList.remove('is-end-of-timer')
     track 'Game', 'Make New Game', 'From Game'
@@ -100,11 +101,13 @@ makeNewGame = ->
   fillElem 'js-overlay', t.startGameOverlay()
 
   el('js-start-game').addEventListener 'click', (e) ->
+    e.preventDefault()
     startGame()
     track 'Game', 'Start New Game'
     false
 
   el('js-show-intro').addEventListener 'click', (e) ->
+    e.preventDefault()
     renderIntro()
     track 'Intro', 'Back to Intro from Game'
     false
