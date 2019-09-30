@@ -38,7 +38,11 @@ letterChooser = itemChooser(letters)
 # Counter stuff
 
 renderTimeLeft = (secondsLeft) ->
-  fillElem 'js-time-left', secondsLeft.toString()
+  minutes = Math.floor(secondsLeft / 60)
+  seconds = secondsLeft - (minutes * 60)
+  secondsString = seconds.toString().padStart(2, "0")
+  timeString = minutes.toString() + ":" + secondsString
+  fillElem 'js-time-left', timeString
 
 endTimerEvent = ->
   clearInterval(window.counterId)
