@@ -361,18 +361,26 @@ li {
 // Used in the game screen.
 
 .logo-button {
+  border-radius: 32px;
   color: @brand-color;
   display: block;
   height: 48px;
-  margin: 8px;
+  margin: 0;
+  padding: 8px 24px 8px 8px;
   text-decoration: none;
 
   &:hover {
-    opacity: .8;
+    background-color: @green-100;
+    box-shadow: 0 0 0 3px @green-900;
+    color: @green-900;
+
+    .logo-button-image {
+      filter: brightness(50%);
+    }
   }
 
   &:active {
-    opacity: .6;
+    transform: translateY(2px);
   }
 
 }
