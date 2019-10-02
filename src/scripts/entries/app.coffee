@@ -18,11 +18,10 @@ import packs from '../data/packs.coffee'
 packList = Object.keys(packs)
 
 # Variables
-window.counterId = 0
 window.currentPack = null
 
 
-# And now, the app…
+# The app
 
 setPack = (pack) ->
   # don't destroy the cat chooser if we don't have to. it's holding state.
@@ -35,7 +34,7 @@ setPack('original')
 letterChooser = itemChooser(letters)
 
 
-# Counter stuff
+# Game Stuff
 
 renderTimeLeft = (secondsLeft) ->
   minutes = Math.floor(secondsLeft / 60)
@@ -44,11 +43,12 @@ renderTimeLeft = (secondsLeft) ->
   timeString = minutes.toString() + ":" + secondsString
   fillElem 'js-time-left', timeString
 
+
 endTimerEvent = ->
-  clearInterval(window.counterId)
+  clearInterval(window.gameTimerId)
   bodyClassList.add('is-end-of-timer')
 
-  fillElem 'js-timer-section', t.gameOver()
+  fillElem 'js-time-left', "Game over!"
 
   playRandomSound()
 
@@ -67,33 +67,38 @@ endTimerEvent = ->
 
   return
 
-startCounter = (seconds) ->
-  counter = seconds
-
-  fillElem 'js-timer-section', t.timer()
-  fillElem 'js-fill-button-bar', ''
-  renderTimeLeft(counter)
-
-  window.counterId = setInterval ->
-    counter--
-    if counter <= 0
-      endTimerEvent()
-      track 'Game', 'End Game'
-    else
-      renderTimeLeft(counter)
-  , 1000
-
-
-# Games
 
 startGame = ->
   el('js-game-container').classList.remove('is-blurred')
   fillElem 'js-overlay', ''
-  startCounter(150)
+
+  gamelengthSeconds = 150
+  gamelengthMs = gamelengthSeconds * 1000
+  startDate = Date.now()
+  endDate = parseInt(Date.now()) + gamelengthMs
+
+  renderTimeLeft(gamelengthSeconds)
+
+  # Adapted from…
+  # https://codeburst.io/a-countdown-timer-in-pure-javascript-f3cdaae1a1a3
+  window.gameTimerId = setInterval ->
+    calculateTime()
+  , 150
+
+  calculateTime = ->
+    startDate = new Date().getTime()
+
+    secondsRemaining = parseInt((endDate - startDate) / 1000)
+    renderTimeLeft(secondsRemaining)
+
+    if secondsRemaining == 0
+      endTimerEvent()
+
   return
 
+
 makeNewGame = ->
-  clearInterval(window.counterId)
+  clearInterval(window.gameTimerId)
   bodyClassList.remove('is-end-of-timer')
 
   data =
@@ -122,7 +127,7 @@ makeNewGame = ->
 # App Intro
 
 renderIntro = ->
-  clearInterval(window.counterId)
+  clearInterval(window.gameTimerId)
   bodyClassList.remove('is-end-of-timer')
 
   fillElem 'js-intro', t.intro()

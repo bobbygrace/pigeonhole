@@ -47,8 +47,7 @@ module.exports = {
           p '.intro-content-section-details', ->
             text "Made by "
             a href: "http://bobbygrace.info", "Bobby"
-            text " and "
-            a href: "http://madeleineburkart.com", "Madeleine Grace"
+            text " and Madeleine Grace"
 
   packButton: renderable ({name, displayName}) ->
     button '.mod-pack.js-select-pack', {'data-name': name}, displayName
@@ -62,7 +61,10 @@ module.exports = {
         div '.game-section-detail', ->
           p '.letter', letter
 
-        div '.js-timer-section'
+        div '.js-timer-section', ->
+          p '.game-section-header', "Time"
+          div '.game-section-detail', ->
+            p '.game-timer.js-time-left'
 
       div '.game-section.mod-right', ->
         p '.game-section-header', "Categories"
@@ -87,15 +89,6 @@ module.exports = {
 
   gameOverButtons: renderable ->
     button '.mod-button-bar.js-new-game', "New Game"
-
-  timer: renderable ->
-    p '.game-section-header', "Time"
-    div '.game-section-detail', ->
-      p '.game-timer.js-time-left'
-
-  gameOver: renderable ->
-    div '.game-section-detail', ->
-      p '.game-timer', "Game Over!"
 
   startButton: renderable ->
     button '.js-start-game', "Start"
