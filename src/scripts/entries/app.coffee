@@ -16,25 +16,109 @@ import playRandomSound from '../lib/playRandomSound.coffee'
 import letters from '../data/letters.coffee'
 import packs from '../data/packs.coffee'
 packList = Object.keys(packs)
+letterChooser = itemChooser(letters)
 
 # Variables
 window.currentPack = null
 
 
-# The app
+# General
 
 setPack = (pack) ->
-  # don't destroy the cat chooser if we don't have to. it's holding state.
+  # Cat chooser is holding state, so don't destroy it.
   return if pack == window.currentPack && pack?
   window.currentPack = pack ? 'original'
   window.catChooser = itemChooser(packs[window.currentPack].categories)
 
-setPack('original')
+setPack 'original'
 
-letterChooser = itemChooser(letters)
+
+# Base
+
+renderBaseLayout = ->
+  fillElem 'js-app', t.baseLayout()
+  renderIntro()
+  return
+
+
+# App Intro
+
+renderIntro = ->
+  clearInterval(window.gameTimerId)
+  bodyClassList.remove('is-end-of-timer')
+
+  fillElem 'js-intro', t.intro()
+  fillElem 'js-game', ''
+  fillElem 'js-overlay', ''
+
+  el('js-open-new-game-overlay').addEventListener 'click', (e) ->
+    track 'Intro', 'Open New Game Overlay'
+    openNewGameOverlay()
+
+  return
+
+
+# New Game Overlay
+
+openNewGameOverlay = ->
+
+  fillElem 'js-overlay', t.newGameOverlay()
+  fillElem 'js-game', ''
+  fillElem 'js-intro', ''
+
+  renderPacks = ->
+    packButtons = []
+
+    for pack in packList
+      data =
+        name: pack
+        labelText: packs[pack].name
+        isChecked: pack == window.currentPack
+      packButtons.push t.radioButton(data)
+
+    fillElem 'js-fill-packs', packButtons.join('')
+
+    for pack in packList
+      target = document.querySelectorAll("[data-name=#{pack}]")[0]
+      target.addEventListener 'click', (e) ->
+        name = e.currentTarget.getAttribute('data-name')
+        track 'New Game Overlay', "Set Pack #{name}"
+        setPack name
+        renderPacks()
+        false
+
+  renderPacks()
+
+  renderGame()
+
+  el('js-start-game').addEventListener 'click', (e) ->
+    e.preventDefault()
+    renderGame() # in case the data changed.
+    startGame()
+    track 'New Game Overlay', "Start Game, Pack: #{window.currentPack}"
+    false
 
 
 # Game Stuff
+
+renderGame = ->
+  clearInterval(window.gameTimerId)
+  bodyClassList.remove('is-end-of-timer')
+
+  data =
+    letter: letterChooser()
+    catList: getMultipleItems(window.catChooser, 10)
+
+  fillElem 'js-game', t.game data
+
+  el('js-show-intro').addEventListener 'click', (e) ->
+    e.preventDefault()
+    renderIntro()
+    track 'Game Bar', 'Back to Intro'
+    false
+
+  return
+
 
 renderTimeLeft = (secondsLeft) ->
   minutes = Math.floor(secondsLeft / 60)
@@ -44,7 +128,7 @@ renderTimeLeft = (secondsLeft) ->
   fillElem 'js-time-left', timeString
 
 
-endTimerEvent = ->
+endGame = ->
   clearInterval(window.gameTimerId)
   bodyClassList.add('is-end-of-timer')
 
@@ -60,9 +144,9 @@ endTimerEvent = ->
 
   el('js-new-game').addEventListener 'click', (e) ->
     e.preventDefault()
-    makeNewGame()
+    openNewGameOverlay()
     bodyClassList.remove('is-end-of-timer')
-    track 'Game', 'Make New Game', 'From Game'
+    track 'Game', 'Open New Game Overlay'
     false
 
   return
@@ -71,6 +155,7 @@ endTimerEvent = ->
 startGame = ->
   el('js-game-container').classList.remove('is-blurred')
   fillElem 'js-overlay', ''
+  fillElem 'js-intro', ''
 
   gamelengthSeconds = 150
   gamelengthMs = gamelengthSeconds * 1000
@@ -92,74 +177,11 @@ startGame = ->
     renderTimeLeft(secondsRemaining)
 
     if secondsRemaining == 0
-      endTimerEvent()
+      endGame()
 
   return
 
 
-makeNewGame = ->
-  clearInterval(window.gameTimerId)
-  bodyClassList.remove('is-end-of-timer')
-
-  data =
-    letter: letterChooser()
-    catList: getMultipleItems(window.catChooser, 10)
-
-  fillElem 'js-game', t.game data
-  fillElem 'js-intro', ''
-  fillElem 'js-overlay', t.startGameOverlay()
-
-  el('js-start-game').addEventListener 'click', (e) ->
-    e.preventDefault()
-    startGame()
-    track 'Game', 'Start New Game'
-    false
-
-  el('js-show-intro').addEventListener 'click', (e) ->
-    e.preventDefault()
-    renderIntro()
-    track 'Intro', 'Back to Intro from Game'
-    false
-
-  return
-
-
-# App Intro
-
-renderIntro = ->
-  clearInterval(window.gameTimerId)
-  bodyClassList.remove('is-end-of-timer')
-
-  fillElem 'js-intro', t.intro()
-  fillElem 'js-game', ''
-  fillElem 'js-overlay', ''
-
-  packButtons = []
-  for pack in packList
-    data =
-      name: pack
-      displayName: packs[pack].name
-    packButtons.push t.packButton(data)
-
-  fillElem 'js-pack-list', packButtons.join('')
-
-  for pack in packList
-    target = document.querySelectorAll("[data-name=#{pack}]")[0]
-    target.addEventListener 'click', (e) ->
-      name = e.currentTarget.getAttribute('data-name')
-      setPack name
-      makeNewGame()
-      track 'Game', 'Make New Game', "#{name}, From Intro Pack Section"
-      false
-
-  return
-
-
-# Base
-
-renderBaseLayout = ->
-  fillElem 'js-app', t.baseLayout()
-  renderIntro()
-  return
+# Render and start the app
 
 renderBaseLayout()

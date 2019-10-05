@@ -32,6 +32,12 @@ body {
 
 // Typography
 
+.m-button-text () {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
 body, input, textarea {
   font-size: 22px;
   line-height: 32px;
@@ -41,13 +47,11 @@ body, input, textarea {
 }
 
 button {
+  .m-button-text();
   color: @default-text-color;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 24px;
-  font-weight: 500;
   letter-spacing: 1px;
+  font-size: 24px;
   line-height: 32px;
-  text-transform: uppercase;
 }
 
 .m-header () {
@@ -64,6 +68,14 @@ button {
   text-transform: uppercase;
 }
 
+h1 {
+  margin: 24px 0;
+}
+
+h2 {
+  margin: 24px 0;
+}
+
 p {
   margin: 16px 0;
 }
@@ -76,6 +88,9 @@ blockquote {
   line-height: 32px;
 }
 
+li {
+  margin: 0 0 24px 0;
+}
 
 
 // Button
@@ -110,22 +125,92 @@ button {
     margin: 0;
   }
 
-li {
-  margin: 0 0 16px 0;
+
+// Radio Button
+
+.radio-button {
+  min-height: 48px;
+  display: flex;
+  margin: 16px;
 }
 
+  .radio-button-check {
+    border-radius: 24px;
+    height: 48px;
+    margin: 0;
+    min-width: 48px;
+    padding: 0;
+
+  }
+
+  .radio-button-label {
+    .m-button-text();
+    font-size: 24px;
+    letter-spacing: 1px;
+    line-height: 32px;
+    padding: 8px 16px;
+    margin: 0;
+  }
+
+.radio-button.is-checked {
+
+  .radio-button-check {
+    background-color: @green-500;
+    background-image: url('/images/check.svg');
+    background-repeat: no-repeat;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      background-color: @green-900;
+    }
+
+  }
+
+}
+
+
+// New Game Overlay
+
+.new-game-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-x: auto;
+
+  background-image:
+    radial-gradient(
+      hsla(0, 0%, 100%, .8),
+      hsla(0, 0%, 100%, .2)
+    );
+
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  z-index: 100;
+}
+
+.new-game-overlay-content {
+  margin: 128px auto;
+  max-width: 720px;
+  text-align: center;
+}
+
+.pack-chooser {
+  margin-bottom: 48px;
+  max-width: 720px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
 
 
 // Intro
 
 .intro {
-  bottom: 0;
-  left: 0;
-  overflow: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 100;
 }
 
   .intro-content {
@@ -398,27 +483,6 @@ li {
     margin: 0 0 0 16px;
     vertical-align: middle;
   }
-
-
-// Center overlay
-
-.center-overlay {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-
-  display: flex;
-  align-items: center;
-  background-image:
-    radial-gradient(
-      hsla(0, 0%, 100%, .8),
-      hsla(0, 0%, 100%, .2)
-    );
-  justify-content: center;
-  z-index: 100;
-}
 
 
 // End of Timer

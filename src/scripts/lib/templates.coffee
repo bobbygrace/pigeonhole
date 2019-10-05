@@ -1,13 +1,13 @@
 # Teacup
 import { renderable, div, p, img, span, text, strong, a, button, blockquote,
-  ol, li, h1, h2 } from 'teacup'
+  ol, li, h1, h2, label } from 'teacup'
 
 module.exports = {
 
   baseLayout: renderable ->
+    div '.js-overlay'
     div '.js-intro'
     div '.js-game'
-    div '.js-overlay'
     return
 
   intro: renderable ->
@@ -19,11 +19,7 @@ module.exports = {
             img '.logo-image', src: '/images/logo-light.svg'
             h1 '.logo-text', "Pigeonhole"
           p '.intro-header-opening', "A word game of categories."
-
-        div '.intro-packs', ->
-          h2 '.intro-content-section-header', "Select a Pack"
-          div '.intro-content-section-details', ->
-            div '.js-pack-list'
+          button '.intro-header-start-button.js-open-new-game-overlay', "Start"
 
         div '.intro-content-section', ->
           h2 '.intro-content-section-header', "How to Play"
@@ -32,7 +28,7 @@ module.exports = {
             ol ->
               li ->
                 p "Gather a group of friends around the screen.
-                The more the merrier! There's no player limit."
+                  There is no player limit. The more the merrier!"
               li ->
                 p "When you start a game, you get one letter,
                   ten categories, and two and a half minutes."
@@ -48,6 +44,24 @@ module.exports = {
             text "Made by "
             a href: "http://bobbygrace.info", "Bobby"
             text " and Madeleine Grace"
+
+  radioButton: renderable ({labelText, name, isChecked}) ->
+
+    classes = '.radio-button'
+    if isChecked
+      classes += '.is-checked'
+
+    div classes, ->
+      button '.radio-button-check.js-select-pack', {'data-name': name}
+      label '.radio-button-label', labelText
+
+  newGameOverlay: renderable () ->
+    div '.new-game-overlay', ->
+      div '.new-game-overlay-content', ->
+        h2 "Pick a pack"
+        div '.pack-chooser.js-fill-packs'
+        h2 "Ready?"
+        button '.js-start-game', "Start"
 
   packButton: renderable ({name, displayName}) ->
     button '.mod-pack.js-select-pack', {'data-name': name}, displayName
@@ -81,11 +95,6 @@ module.exports = {
           span '.logo-button-text', "Pigeonhole"
 
       div '.button-bar-right-section.js-fill-button-bar', ->
-
-
-  startGameOverlay: renderable ->
-    div '.center-overlay.js-section-start-game', ->
-      button '.js-start-game', "Start"
 
   gameOverButtons: renderable ->
     button '.mod-button-bar.js-new-game', "New Game"
